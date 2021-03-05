@@ -1,0 +1,7 @@
+**/*.css eol=lf
+vendor/**/*.css eol=lf
+vendor/**/*.js eol=lf
+vendor/**/*.json eol=lf
+vendor/**/*.html eol=lf
+vendor/**/*.svg eol=lf
+vendor/**/*.less eol=lf
