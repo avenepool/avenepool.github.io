@@ -66,9 +66,9 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
-          <h1>AVENE Stake Pool</h1>
-          <h2>TODO : We are team of talented designers</h2>
-          <p>Pool ID: 5e7ff9707b194d0a8abc37b35d6ca34112faaa777032e2268b2f8d07</p>
+          <h1>Cardano Stake Pool</h1>
+          <h2>Ticker: AVENE</h2>
+          <p style="word-break: break-all;">Pool ID: 5e7ff9707b194d0a8abc37b35d6ca34112faaa777032e2268b2f8d07</p>
         </div>
       </div>
 
@@ -158,31 +158,38 @@
 
           <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="2" class="purecounter"></span>
-              <p>ROA</p>
+			  <!--
+              <span data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="0.2" data-purecounter-decimals="1" class="purecounter"></span>
+			  -->
+			  <span>50.00k</span>
+              <p>Pledge</p>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="2" class="purecounter"></span>
-              <p>Delegators</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <span data-purecounter-start="0" data-purecounter-end="30" data-purecounter-duration="2" class="purecounter"></span>
+              <span id="cntStake"></span>
               <p>Live Stake</p>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-purecounter-start="0" data-purecounter-end="20" data-purecounter-duration="2" class="purecounter"></span>
+              <span id="cntDeleg"></span>
+              <p>Delegators</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <span id="cntBlock"></span>
               <p>Lifetime Blocks</p>
             </div>
           </div>
+
+        <div class="section-title">
+          <p style="text-align: right;">More info on <a href="https://adapools.org/pool/5e7ff9707b194d0a8abc37b35d6ca34112faaa777032e2268b2f8d07" target="_blank">ADApools.org</a></p>
+        </div>
 
         </div>
 
@@ -487,6 +494,20 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
+
+<script>
+$.getJSON('https://js.adapools.org/pools/5e7ff9707b194d0a8abc37b35d6ca34112faaa777032e2268b2f8d07/summary.json', function(data) { 
+	$.each( data.data, function( i, val ) { 
+		a = new Array('tax_fix','pledge','total_stake');
+		if (a.includes(i)) val = Math.round(parseInt(val)/1000000);
+		if (i=='blocks_lifetime') val=parseInt(val) + parseInt(data.data.blocks_epoch);
+		if (i=='total_stake') $('#cntStake').text(Math.round(val/10)/100 + 'k');
+		if (i=='delegators') $('#cntDeleg').text(val);
+		if (i=='blocks_lifetime') $('#cntBlock').text(val);
+	});
+});
+</script>
 
 </body>
 
