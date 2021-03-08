@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 488 488" style="enable-background:new 0 0 488 488;" xml:space="preserve">
+<svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	viewBox="0 0 488 488" style="enable-background:new 0 0 488 488;" xml:space="preserve">
 <g>
-	<g>
+	<g fill="#0133AD">
 		<path d="M305.4,244c0-33.9-27.6-61.4-61.4-61.4s-61.4,27.5-61.4,61.4s27.6,61.4,61.4,61.4S305.4,277.9,305.4,244z M244,281.4
 			c-20.6,0-37.4-16.8-37.4-37.4s16.8-37.4,37.4-37.4s37.4,16.8,37.4,37.4S264.6,281.4,244,281.4z"/>
 		<path d="M155.1,232c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S161.7,232,155.1,232z"/>
@@ -39,35 +38,5 @@
 		<path d="M134.1,134.1c17.3-17.3,17.3-45.3,0-62.6s-45.3-17.3-62.6,0s-17.3,45.3,0,62.6C88.7,151.3,116.8,151.3,134.1,134.1z
 			 M88.4,88.4c7.9-7.9,20.7-7.9,28.6,0s7.9,20.7,0,28.6s-20.7,7.9-28.6,0C80.5,109.2,80.5,96.3,88.4,88.4z"/>
 	</g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
 </g>
 </svg>
