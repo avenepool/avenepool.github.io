@@ -1,0 +1,22 @@
+{
+  "info": {
+    "url_png_icon_64x64": "https://avenepool.com/assets/img/avenepool64.png",
+    "url_png_logo": "https://avenepool.com/assets/img/avenepool512.png",
+    "location": "Latvia, Northern Europe",
+    "social": {
+      "twitter_handle": "avenepool"
+    },
+    "about": {
+      "me": "AVENE Stake Pool",
+      "server": "VPS on Contabo",
+      "company": "AVENE Pool"
+    },
+    "rss": ""
+  },
+  "my-pool-ids": {
+    "0": "5e7ff9707b194d0a8abc37b35d6ca34112faaa777032e2268b2f8d07"
+  },
+  "when-satured-then-recommend": {
+    "0": "00beef0a9be2f6d897ed24a613cf547bb20cd282a04edfc53d477114"
+  }
+}
