@@ -101,8 +101,8 @@
         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="500">
           <div class="icon-box">
             <div class="icon"><i class="ri-chat-heart-line"></i></div>
-            <h4 class="title">Community</h4>
-            <p class="description">We support the community by spreading the awareness of the Cardano ecosystem.</p>
+            <h4 class="title">Mission</h4>
+            <p class="description">We support the West Africa Decentralized Alliance (WADA) Foundation.</p>
           </div>
         </div>
 
@@ -153,8 +153,8 @@
 			  <!--
               <span data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="0.2" data-purecounter-decimals="1" class="purecounter"></span>
 			  -->
-			  <span>50.00k</span>
-              <p>Pledge</p>
+			  <span id="cntRoa"></span>
+              <p>Lifetime ROA</p>
             </div>
           </div>
 
@@ -467,6 +467,7 @@ $.getJSON('https://js.adapools.org/pools/5e7ff9707b194d0a8abc37b35d6ca34112faaa7
 		if (i=='total_stake') $('#cntStake').text(Math.round(val/10)/100 + 'k');
 		if (i=='delegators') $('#cntDeleg').text(val);
 		if (i=='blocks_lifetime') $('#cntBlock').text(val);
+		if (i=='roa_lifetime') $('#cntRoa').text(Math.round(val*100)/100 + '%');
 	});
 });
 </script>
