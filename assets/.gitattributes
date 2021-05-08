@@ -1,4 +1,5 @@
 **/*.css eol=lf
+img/**/*.svg eol=lf
 js/jquery.min.js eol=lf
 vendor/**/*.css eol=lf
 vendor/**/*.js eol=lf
