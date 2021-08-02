@@ -8,13 +8,13 @@
     contact: hello@wadalliance.org
   ada: 280
   usd: x # 1.5641
-  timestamp: x # 2021-08-02 06:44:44 UTC
+  timestamp: 1627887499 # 2021-08-02 06:58:19 UTC
   files:
     - AVENE/2021-08-WADA.png
     - AVENE/2021-07-rewards.png
     - AVENE/2021-06-rewards.png
-  announcement_url: x
-  charity_tx_id: x
+  announcement_url: https://twitter.com/avenepool/status/1422100279269502977
+  charity_tx_id: a7af5f24c9be134b4ad8195ccf3e37587195c28ce09ba8bf786091f8c25a9440
 
 - ticker: AVENE
   recipient:
