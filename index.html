@@ -74,6 +74,9 @@
           <h2>Ticker: AVENE</h2>
           <p style="word-break: break-all;">Pool ID: 5e7ff9707b194d0a8abc37b35d6ca34112faaa777032e2268b2f8d07</p>
         </div>
+        <div class="text-center">
+          <a href="https://armada-alliance.com/delegation-widget?pool_id=5e7ff9707b194d0a8abc37b35d6ca34112faaa777032e2268b2f8d07&blockfrost_project_id=rLi1KGBpzooHXTjCitUkbk7fd0I5osMI" class="btn-get-started" target="popup" onclick="window.open(this.href,'delegate','width=400,height=600'); return false;">Delegate</a>
+        </div>
       </div>
 
       <div class="row icon-boxes">
@@ -500,7 +503,7 @@ $.getJSON('https://js.adapools.org/pools/5e7ff9707b194d0a8abc37b35d6ca34112faaa7
 		a = new Array('tax_fix','pledge','total_stake');
 		if (a.includes(i)) val = Math.round(parseInt(val)/1000000);
 		if (i=='blocks_lifetime') val=parseInt(val) + parseInt(data.data.blocks_epoch);
-		if (i=='total_stake') $('#cntStake').text(Math.round(val/10)/100 + 'k');
+		if (i=='total_stake') $('#cntStake').text(Math.round(val/10000)/100 + 'm');
 		if (i=='delegators') $('#cntDeleg').text(val);
 		if (i=='blocks_lifetime') $('#cntBlock').text(val);
 		if (i=='roa_lifetime') $('#cntRoa').text(Math.round(val*100)/100 + '%');
