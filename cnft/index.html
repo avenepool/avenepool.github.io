@@ -10,21 +10,48 @@
 <script type="text/javascript">
 	function loadData() {
 		var key = $("#options").val();
+		//$.getJSON( "sample.json", function( json ) {
 		$.getJSON( "https://api.cnft.io/api/sold?search=" + key + "&sort=date&order=desc&count=100&page=1", function( json ) {
 			var items = [];
 			console.log("Assets: " + json.assets.length);
 			for (var i = 0; i < json.assets.length; i++) {
 				var date = new Date(json.assets[i].date);
 				var price = Math.round(json.assets[i].price/10000)/100;
+				var unit = json.assets[i].unit;
+				
 				items.push( "<tr>" +
 					"<td>" + json.assets[i].assetid + "</td>" +
 					"<td>" + date.toLocaleString('lv-LV', { hour12: false }) + "</td>" +
 					"<td>" + price + "</td>" +
-					"<td>" + json.assets[i].unit + "</td>" +
+					"<td><a href='https://cardanoscan.io/token/" + unit + "' target='_blank'>info</a></td>" +
+					"<td><a href=\"javascript:loadAsset('" + unit + "')\">pool.pm</a></td>" +
+					"<td><a href=\"javascript:loadAsset('" + unit + "')\">owner</a></td>" +
 					"</tr>" );
 			}
 			
 			$("#table").empty().append(items.join(""));
+		});
+	}
+	function hexToStr(hex) {
+		var str = '';
+		for (var n = 0; n < hex.length; n += 2) str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+		return str;
+	}
+	function loadAsset(id) {
+		console.log("Asset: " + id);
+		$.ajax({
+			beforeSend: function(request) {
+				request.setRequestHeader("project_id", 'rLi1KGBpzooHXTjCitUkbk7fd0I5osMI');
+			},
+			dataType: "json",
+			url: "https://cardano-mainnet.blockfrost.io/api/v0/assets/" + id,
+			success: function( json ) {
+				console.log("Asset: " + json);
+				var policyId = json.policy_id;
+				var assetName = hexToStr(json.asset_name);
+				console.log("Asset: " + assetName);
+				window.open('https://pool.pm/' + policyId + '.' + assetName, '_blank');
+			}
 		});
 	}
 </script>
@@ -57,18 +84,22 @@
 	
 	<br/>
 
-	<table class="table table-striped">
+	<div class="table-responsive">
+	<table class="table table-sm table-striped">
 		<thead>
 			<tr>
 				<th scope="col">ID</th>
 				<th scope="col">Date</th>
 				<th scope="col">Price</th>
-				<th scope="col">Unit</th>
+				<th scope="col">#1</th>
+				<th scope="col">#2</th>
+				<th scope="col">#3</th>
 			</tr>
 		</thead>
 		<tbody id="table">
 		</tbody>
 	</table>
+	</div>
 
 	</main>
 	<footer class="pt-5 my-5 text-muted border-top">&copy; 2021</footer>
