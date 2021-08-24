@@ -8,6 +8,7 @@
 <script src="./bootstrap.min.js"></script>
 <script src="./jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+	var projectId = "rLi1KGBpzooHXTjCitUkbk7fd0I5osMI";
 	function loadData() {
 		var key = $("#options").val();
 		//$.getJSON( "sample.json", function( json ) {
@@ -25,7 +26,7 @@
 					"<td>" + price + "</td>" +
 					"<td><a href='https://cardanoscan.io/token/" + unit + "' target='_blank'>info</a></td>" +
 					"<td><a href=\"javascript:loadAsset('" + unit + "')\">pool.pm</a></td>" +
-					"<td><a href=\"javascript:loadAsset('" + unit + "')\">owner</a></td>" +
+					"<td><a href=\"javascript:loadOwner('" + unit + "')\">owner</a></td>" +
 					"</tr>" );
 			}
 			
@@ -41,16 +42,30 @@
 		console.log("Asset: " + id);
 		$.ajax({
 			beforeSend: function(request) {
-				request.setRequestHeader("project_id", 'rLi1KGBpzooHXTjCitUkbk7fd0I5osMI');
+				request.setRequestHeader("project_id", projectId);
 			},
 			dataType: "json",
 			url: "https://cardano-mainnet.blockfrost.io/api/v0/assets/" + id,
 			success: function( json ) {
-				console.log("Asset: " + json);
 				var policyId = json.policy_id;
 				var assetName = hexToStr(json.asset_name);
 				console.log("Asset: " + assetName);
 				window.open('https://pool.pm/' + policyId + '.' + assetName, '_blank');
+			}
+		});
+	}
+	function loadOwner(id) {
+		console.log("Asset: " + id);
+		$.ajax({
+			beforeSend: function(request) {
+				request.setRequestHeader("project_id", projectId);
+			},
+			dataType: "json",
+			url: "https://cardano-mainnet.blockfrost.io/api/v0/assets/" + id + "/addresses",
+			success: function( json ) {
+				var address = json[0].address;
+				console.log("Address: " + address);
+				window.open('https://pool.pm/' + address, '_blank');
 			}
 		});
 	}
@@ -69,11 +84,15 @@
 		<div class="row">
 			<div class="col">
 				<select class="form-select" id="options">
+					<option value="3383a7ea34c92eac945847641d4e8fd036fe213abf1f686710f30f56">Attack on Vitalik</option>
+					<option value="1131301ad4b3cb7deaddbc8f03f77189082a5738c0167e1772233097">CardanoBits</option>
+					<option value="b48990272ecef6e618a3cd3f83511ce58606117daa0921191eac5903">Cardano Caricatures</option>
+					<option value="kidz">Cardano Kidz (all)</option>
+					<option value="9bee44c5c494dee38622e6da0b3b312820f9f75dd6cc256c769db788">Cryptoknitties</option>
 					<option value="788888fd99cb7ef837570ce5bf8808d959697a025adeca03d46349f1">KaizenNFT</option>
-					<option value="b48990272ecef6e618a3cd3f83511ce58606117daa0921191eac5903">Caricatures</option>
-					<option value="kidz">Kidz</option>
-					<option value="3383a7ea34c92eac945847641d4e8fd036fe213abf1f686710f30f56">Vitalik</option>
 					<option value="1ec85dcee27f2d90ec1f9a1e4ce74a667dc9be8b184463223f9c9601">PXL</option>
+					<option value="d5e6bf0500378d4f0da4e8dde6becec7621cd8cbf5cbb9b87013d4cc">SpaceBudz</option>
+					<option value="e986d38f4ead45a4f909cb51d61d8d95efc72b12d9302cdd040974d1">The Hoskinsons</option>
 				</select>
 			</div>
 			<div class="col">
@@ -102,8 +121,16 @@
 	</div>
 
 	</main>
-	<footer class="pt-5 my-5 text-muted border-top">&copy; 2021</footer>
+	<footer class="pt-5 my-5 text-muted border-top">@avenepool &copy; 2021</footer>
 </div>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6G166EKF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q6G166EKF0');
+</script>
 
 </body>
 </html>
