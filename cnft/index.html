@@ -15,7 +15,8 @@
 		$.getJSON( "https://api.cnft.io/api/sold?search=" + key + "&sort=date&order=desc&count=100&page=1", function( json ) {
 			var items = [];
 			console.log("Assets: " + json.assets.length);
-			for (var i = 0; i < json.assets.length; i++) {
+//			for (var i = 0; i < json.assets.length; i++) {
+			for (var i = (json.assets.length - 1); i >= 0; i--) {
 				var date = new Date(json.assets[i].date);
 				var price = Math.round(json.assets[i].price/10000)/100;
 				var unit = json.assets[i].unit;
@@ -93,6 +94,7 @@
 					<option value="1ec85dcee27f2d90ec1f9a1e4ce74a667dc9be8b184463223f9c9601">PXL</option>
 					<option value="d5e6bf0500378d4f0da4e8dde6becec7621cd8cbf5cbb9b87013d4cc">SpaceBudz</option>
 					<option value="e986d38f4ead45a4f909cb51d61d8d95efc72b12d9302cdd040974d1">The Hoskinsons</option>
+					<option value="0e14267a8020229adc0184dd25fa3174c3f7d6caadcb4425c70e7c04">unsigned_algorithms</option>
 				</select>
 			</div>
 			<div class="col">
