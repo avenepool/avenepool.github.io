@@ -10,6 +10,14 @@
 <script type="text/javascript">
 	var projectId = "rLi1KGBpzooHXTjCitUkbk7fd0I5osMI";
 	function loadData() {
+		var type = $("#type").val();
+		if (type == "sold_by_date") {
+			querySold();
+		} else {
+			queryListings(type == "listings_by_date");
+		}
+	}
+	function querySold() {
 		var key = $("#options").val();
 		//$.getJSON( "sample.json", function( json ) {
 		$.getJSON( "https://api.cnft.io/api/sold?search=" + key + "&sort=date&order=desc&count=100&page=1", function( json ) {
@@ -20,7 +28,6 @@
 				var date = new Date(json.assets[i].date);
 				var price = Math.round(json.assets[i].price/10000)/100;
 				var unit = json.assets[i].unit;
-				
 				items.push( "<tr>" +
 					"<td>" + json.assets[i].assetid + "</td>" +
 					"<td>" + date.toLocaleString('lv-LV', { hour12: false }) + "</td>" +
@@ -32,6 +39,34 @@
 			}
 			
 			$("#table").empty().append(items.join(""));
+		});
+	}
+	function queryListings(byDate) {
+		var key = $("#options").val();
+		$.ajax({
+			type: 'POST',
+			dataType: "json",
+			url: "https://api.cnft.io/market/listings",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: { search: key, sort: (byDate ? "date" : "price"), order: (byDate ? "desc" : "asc"), page: "1", count: "100", verified: "true" },
+			success: function( json ) {
+				var items = [];
+				for (var i = 0; i < json.assets.length; i++) {
+					var date = new Date(json.assets[i].listingDate);
+					var price = Math.round(json.assets[i].price/10000)/100;
+					var unit = json.assets[i].unit;
+					items.push( "<tr>" +
+						"<td>" + json.assets[i].assetid + "</td>" +
+						"<td>" + date.toLocaleString('lv-LV', { hour12: false }) + "</td>" +
+						"<td>" + price + "</td>" +
+						"<td><a href='https://cardanoscan.io/token/" + unit + "' target='_blank'>info</a></td>" +
+						"<td><a href=\"javascript:loadAsset('" + unit + "')\">pool.pm</a></td>" +
+						"<td><a href=\"javascript:loadOwner('" + unit + "')\">owner</a></td>" +
+						"</tr>" );
+				}
+				
+				$("#table").empty().append(items.join(""));
+			}
 		});
 	}
 	function hexToStr(hex) {
@@ -90,11 +125,19 @@
 					<option value="b48990272ecef6e618a3cd3f83511ce58606117daa0921191eac5903">Cardano Caricatures</option>
 					<option value="kidz">Cardano Kidz (all)</option>
 					<option value="9bee44c5c494dee38622e6da0b3b312820f9f75dd6cc256c769db788">Cryptoknitties</option>
-					<option value="788888fd99cb7ef837570ce5bf8808d959697a025adeca03d46349f1">KaizenNFT</option>
+					<option value="788888fd99cb7ef837570ce5bf8808d959697a025adeca03d46349f1" selected="selected">KaizenNFT</option>
 					<option value="1ec85dcee27f2d90ec1f9a1e4ce74a667dc9be8b184463223f9c9601">PXL</option>
 					<option value="d5e6bf0500378d4f0da4e8dde6becec7621cd8cbf5cbb9b87013d4cc">SpaceBudz</option>
+					<option value="b4c830cb0b1342f7b6c14b2ece2205a3a95ea19f78a3b6e5a9e1a321">The Galgos</option>
 					<option value="e986d38f4ead45a4f909cb51d61d8d95efc72b12d9302cdd040974d1">The Hoskinsons</option>
 					<option value="0e14267a8020229adc0184dd25fa3174c3f7d6caadcb4425c70e7c04">unsigned_algorithms</option>
+				</select>
+			</div>
+			<div class="col">
+				<select class="form-select" id="type">
+					<option value="sold_by_date" selected="selected">Sold by date DESC</option>
+					<option value="listings_by_price">Listings by price ASC</option>
+					<option value="listings_by_date">Listings by date DESC</option>
 				</select>
 			</div>
 			<div class="col">
