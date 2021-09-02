@@ -18,30 +18,38 @@
 		}
 	}
 	function querySold() {
+		$("#table").empty();
 		var key = $("#options").val();
-		//$.getJSON( "sample.json", function( json ) {
-		$.getJSON( "https://api.cnft.io/api/sold?search=" + key + "&sort=date&order=desc&count=100&page=1", function( json ) {
-			var items = [];
-			console.log("Assets: " + json.assets.length);
-//			for (var i = 0; i < json.assets.length; i++) {
-			for (var i = (json.assets.length - 1); i >= 0; i--) {
-				var date = new Date(json.assets[i].date);
-				var price = Math.round(json.assets[i].price/10000)/100;
-				var unit = json.assets[i].unit;
-				items.push( "<tr>" +
-					"<td>" + json.assets[i].assetid + "</td>" +
-					"<td>" + date.toLocaleString('lv-LV', { hour12: false }) + "</td>" +
-					"<td>" + price + "</td>" +
-					"<td><a href='https://cardanoscan.io/token/" + unit + "' target='_blank'>info</a></td>" +
-					"<td><a href=\"javascript:loadAsset('" + unit + "')\">pool.pm</a></td>" +
-					"<td><a href=\"javascript:loadOwner('" + unit + "')\">owner</a></td>" +
-					"</tr>" );
+		$.ajax({
+			dataType: "json",
+			url: "https://api.cnft.io/api/sold?search=" + key + "&sort=date&order=desc&count=100&page=1",
+			success: function( json ) {
+				var items = [];
+				console.log("Assets: " + json.assets.length);
+//				for (var i = 0; i < json.assets.length; i++) {
+				for (var i = (json.assets.length - 1); i >= 0; i--) {
+					var date = new Date(json.assets[i].date);
+					var price = Math.round(json.assets[i].price/10000)/100;
+					var unit = json.assets[i].unit;
+					items.push( "<tr>" +
+						"<td>" + json.assets[i].assetid + "</td>" +
+						"<td>" + date.toLocaleString('lv-LV', { hour12: false }) + "</td>" +
+						"<td>" + price + "</td>" +
+						"<td><a href='https://cardanoscan.io/token/" + unit + "' target='_blank'>info</a></td>" +
+						"<td><a href=\"javascript:loadAsset('" + unit + "')\">pool.pm</a></td>" +
+						"<td><a href=\"javascript:loadOwner('" + unit + "')\">owner</a></td>" +
+						"</tr>" );
+				}
+				
+				$("#table").empty().append(items.join(""));
+			},
+			error: function( jqXHR, textStatus, errorThrown ) {
+				$("#table").empty().append("<tr><td colspan='6'>" + textStatus + " : " + jqXHR.responseText + "</td></tr>");
 			}
-			
-			$("#table").empty().append(items.join(""));
 		});
 	}
 	function queryListings(byDate) {
+		$("#table").empty();
 		var key = $("#options").val();
 		$.ajax({
 			type: 'POST',
@@ -66,6 +74,9 @@
 				}
 				
 				$("#table").empty().append(items.join(""));
+			},
+			error: function( jqXHR, textStatus, errorThrown ) {
+				$("#table").empty().append("<tr><td colspan='6'>" + textStatus + " : " + jqXHR.responseText + "</td></tr>");
 			}
 		});
 	}
@@ -77,11 +88,9 @@
 	function loadAsset(id) {
 		console.log("Asset: " + id);
 		$.ajax({
-			beforeSend: function(request) {
-				request.setRequestHeader("project_id", projectId);
-			},
 			dataType: "json",
 			url: "https://cardano-mainnet.blockfrost.io/api/v0/assets/" + id,
+			headers: {'project_id': projectId},
 			success: function( json ) {
 				var policyId = json.policy_id;
 				var assetName = hexToStr(json.asset_name);
@@ -93,11 +102,9 @@
 	function loadOwner(id) {
 		console.log("Asset: " + id);
 		$.ajax({
-			beforeSend: function(request) {
-				request.setRequestHeader("project_id", projectId);
-			},
 			dataType: "json",
 			url: "https://cardano-mainnet.blockfrost.io/api/v0/assets/" + id + "/addresses",
+			headers: {'project_id': projectId},
 			success: function( json ) {
 				var address = json[0].address;
 				console.log("Address: " + address);
