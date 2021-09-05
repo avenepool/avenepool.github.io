@@ -6,6 +6,21 @@
     address: Accra, Ghana
     tel: +233 54 257 8107
     contact: hello@wadalliance.org
+  ada: 800
+  usd: 2367.44 # 2.9593
+  timestamp: 1630690507 # 2021-09-03 17:35:07 UTC
+  files:
+    - AVENE/2021-09-WADA.png
+    - AVENE/2021-08-rewards.png
+  announcement_url: https://twitter.com/avenepool/status/1433847284110958596
+  charity_tx_id: 6ba5b3fee8bf4b220fb88355a48f136b2a2ca9c2d41a99bdc5cc14a23c095453
+
+- ticker: AVENE
+  recipient:
+    name: West Africa Decentralized Alliance
+    address: Accra, Ghana
+    tel: +233 54 257 8107
+    contact: hello@wadalliance.org
   ada: 280
   usd: 368.14 # 1.3148
   timestamp: 1627887499 # 2021-08-02 06:58:19 UTC
