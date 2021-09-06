@@ -64,7 +64,7 @@
 					var price = Math.round(json.assets[i].price/10000)/100;
 					var unit = json.assets[i].unit;
 					items.push( "<tr>" +
-						"<td>" + json.assets[i].assetid + "</td>" +
+						"<td>" + json.assets[i].metadata.name + "</td>" +
 						"<td>" + date.toLocaleString('lv-LV', { hour12: false }) + "</td>" +
 						"<td>" + price + "</td>" +
 						"<td><a href='https://cardanoscan.io/token/" + unit + "' target='_blank'>info</a></td>" +
