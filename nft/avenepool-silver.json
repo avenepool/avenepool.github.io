@@ -2,10 +2,8 @@
   "721": {
     "3a7045a59b6c328e69b73b67e92a07bc328445b18a802c2246e42c97": {
       "AvenePoolSilver": {
-        "attributes": {
-          "description": "AVENE Pool Silver Supporter",
-          "publisher": "https://avenepool.com"
-        },
+        "description": "AVENE Pool Silver Supporter",
+        "publisher": "https://avenepool.com",
         "image": "ipfs://QmSWbbp4hpTzSneC2Vsj3cMwtgrf79YNEf4FDx8nQGC7Dr",
         "mediaType": "image/apng",
         "name": "AVENE Pool Silver"
