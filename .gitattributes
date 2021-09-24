@@ -1,3 +1,4 @@
 metadata.json eol=lf
 metadata-ext.json eol=lf
 cnft/* eol=lf
+nft/*.json eol=lf
