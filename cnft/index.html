@@ -13,6 +13,7 @@
 	var gur3 = '.*.Galgos.(0071|0089|0101|0107|0131|0137|0145|0151|0153|0167|0175|0183|0198).*';
 	var gur5 = '.*.Galgos.(0074|0083|0086|0092|0096|0097|0102|0104|0111|0112|0119|0121|0122|0134|0136|0138|0142|0147|0155|0164|0165|0168|0177|0180|0182|0184|0186|0189|0194|0197|0205).*';
 	var gr8 = '.*.Galgos.(0063|0065|0072|0073|0082|0084|0087|0094|0095|0100|0105|0114|0120|0126|0128|0133|0139|0141|0146|0149|0152|0156|0162|0181).*';
+	var gkey = '.*.Galgos.(0074|0119|0112|0122|0130|0180).*';
 	function loadData() {
 		var type = $("#type").val();
 		if (type == "sold_by_date") {
@@ -73,7 +74,7 @@
 					//style
 					var style = '#000000';
 					if (key == 'b4c830cb0b1342f7b6c14b2ece2205a3a95ea19f78a3b6e5a9e1a321') {
-						style = name.match(ge2) ? 'red' : name.match(gur3) ? 'darkorange' : name.match(gur5) ? 'blue' : name.match(gr8) ? 'green' : '#000000';
+						style = name.match(ge2) ? 'red' : name.match(gkey) ? 'red' : name.match(gur3) ? 'darkorange' : name.match(gur5) ? 'blue' : name.match(gr8) ? 'green' : '#000000';
 					}
 
 					//
