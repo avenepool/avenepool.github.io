@@ -1890,3 +1890,7 @@ section {
 #footer .trademark {
   margin-top: 30px;
 }
+
+.section-bg-tokens {
+  background-color: #f7f8fa;
+}
