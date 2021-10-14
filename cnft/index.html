@@ -9,6 +9,7 @@
 <script src="./jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	var projectId = "rLi1KGBpzooHXTjCitUkbk7fd0I5osMI";
+	var gs1 = '.*.Galgos.(0004|0005|0009|0011|0014|0024|0025|0029|0034|0036|0037|0038|0039|0041|0049|0050|0057).*';
 	var ge2 = '.*.Galgos.(0068|0069|0076|0085|0110|0117|0124|0129|0150|0154|0157|0159|0161|0166|0173|0176|0187|0188|0190|0196).*';
 	var gur3 = '.*.Galgos.(0071|0089|0101|0107|0131|0137|0145|0151|0153|0167|0175|0183|0198).*';
 	var gur5 = '.*.Galgos.(0074|0083|0086|0092|0096|0097|0102|0104|0111|0112|0119|0121|0122|0134|0136|0138|0142|0147|0155|0164|0165|0168|0177|0180|0182|0184|0186|0189|0194|0197|0205).*';
@@ -74,7 +75,7 @@
 					//style
 					var style = '#000000';
 					if (key == 'b4c830cb0b1342f7b6c14b2ece2205a3a95ea19f78a3b6e5a9e1a321') {
-						style = name.match(ge2) ? 'red' : name.match(gkey) ? 'red' : name.match(gur3) ? 'darkorange' : name.match(gur5) ? 'blue' : name.match(gr8) ? 'green' : '#000000';
+						style = name.match(gs1) ? 'fuchsia' : name.match(ge2) ? 'red' : name.match(gkey) ? 'red' : name.match(gur3) ? 'darkorange' : name.match(gur5) ? 'blue' : name.match(gr8) ? 'green' : '#000000';
 					}
 
 					//
