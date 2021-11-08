@@ -62,15 +62,19 @@
 			type: 'POST',
 			dataType: "json",
 			url: "https://api.cnft.io/market/listings",
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: { search: key, sort: (byDate ? "date" : "price"), order: (byDate ? "desc" : "asc"), page: "1", count: "200", verified: "true", sold: (bySold ? "true" : "") },
+			headers: {'Content-Type': 'application/json'},
+			//headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			//data: { search: key, sort: (byDate ? "date" : "price"), order: (byDate ? "desc" : "asc"), page: "1", count: "200", verified: "true", sold: (bySold ? "true" : "") },
+			data: JSON.stringify({ nsfw: "false", search: key, page: "1", verified: "true", types: (bySold ? [] : ["auction", "listing", "offer"]), sort: (byDate ? {"_id": -1} : {"price": 1}), sold: (bySold ? true : false) }),
 			success: function( json ) {
 				var items = [];
-				for (var i = 0; i < json.assets.length; i++) {
-					var name = json.assets[i].metadata.name;
-					var date = new Date(bySold ? json.assets[i].dateSold : json.assets[i].dateListed);
-					var price = Math.round(json.assets[i].price/10000)/100;
-					var unit = json.assets[i].unit;
+				for (var i = 0; i < json.results.length; i++) {
+					var name = json.results[i].asset.metadata.name;
+					//var date = new Date(bySold ? json.assets[i].dateSold : json.assets[i].dateListed);
+					var date = new Date(json.results[i].updatedAt);
+					var price = Math.round(json.results[i].price/10000)/100;
+					var unit = json.results[i].asset.unit;
+					var cnftId = json.results[i]._id;
 
 					//style
 					var style = '#000000';
@@ -86,6 +90,7 @@
 						"<td><a href='https://cardanoscan.io/token/" + unit + "' target='_blank'>info</a></td>" +
 						"<td><a href=\"javascript:loadAsset('" + unit + "')\">pool.pm</a></td>" +
 						"<td><a href=\"javascript:loadOwner('" + unit + "')\">owner</a></td>" +
+						"<td><a href='https://cnft.io/token/" + cnftId + "' target='_blank'>cnft</a></td>" +
 						"</tr>" );
 				}
 				
@@ -101,8 +106,15 @@
 		for (var n = 0; n < hex.length; n += 2) str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
 		return str;
 	}
+	function strToHex(str) {
+		var res = '';
+		for (var n = 0; n < str.length; n++) res += str.charCodeAt(n).toString(16);
+		return res;
+	}
 	function loadAsset(id) {
 		console.log("Asset: " + id);
+		window.open('https://pool.pm/' + id, '_blank');
+		/*
 		$.ajax({
 			dataType: "json",
 			url: "https://cardano-mainnet.blockfrost.io/api/v0/assets/" + id,
@@ -114,9 +126,12 @@
 				window.open('https://pool.pm/' + policyId + '.' + assetName, '_blank');
 			}
 		});
+		*/
 	}
 	function loadOwner(id) {
 		console.log("Asset: " + id);
+		const idArray = id.split(".");
+		id = idArray[0] + strToHex(idArray[1]);
 		$.ajax({
 			dataType: "json",
 			url: "https://cardano-mainnet.blockfrost.io/api/v0/assets/" + id + "/addresses",
@@ -151,6 +166,8 @@
 					<option value="kidz">Cardano Kidz (all)</option>
 					<option value="5fa72fbeecbe80a3e15de1cacab54ba5e310e2c36ae85351132ed4ad">cNFTcon</option>
 					<option value="9bee44c5c494dee38622e6da0b3b312820f9f75dd6cc256c769db788">Cryptoknitties</option>
+					<option value="b5fe4b252a54d6c39689c740e9f5b18355b9b983da2295cee6906420">Gnomies</option>
+					<option value="8c3bd4d516389a9fff423640ff04b91ffc1a0455da1d2a66303f4098">Gnomies Seed</option>
 					<option value="788888fd99cb7ef837570ce5bf8808d959697a025adeca03d46349f1">KaizenNFT</option>
 					<option value="89fa6dc66a24799ccaee43a3a16930bb045a8152fdf2a2642034774f">PlanetPalz</option>
 					<option value="1ec85dcee27f2d90ec1f9a1e4ce74a667dc9be8b184463223f9c9601">PXL</option>
@@ -187,6 +204,7 @@
 				<th scope="col">#1</th>
 				<th scope="col">#2</th>
 				<th scope="col">#3</th>
+				<th scope="col">#4</th>
 			</tr>
 		</thead>
 		<tbody id="table">
