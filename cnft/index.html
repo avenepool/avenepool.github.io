@@ -65,7 +65,7 @@
 			headers: {'Content-Type': 'application/json'},
 			//headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			//data: { search: key, sort: (byDate ? "date" : "price"), order: (byDate ? "desc" : "asc"), page: "1", count: "200", verified: "true", sold: (bySold ? "true" : "") },
-			data: JSON.stringify({ nsfw: "false", search: key, page: "1", verified: "true", types: (bySold ? [] : ["auction", "listing", "offer"]), sort: (byDate ? {"_id": -1} : {"price": 1}), sold: (bySold ? true : false) }),
+			data: JSON.stringify({ nsfw: false, search: key, page: 1, verified: true, types: (bySold ? [] : ["auction", "listing", "offer"]), sort: (byDate ? {"_id": 1} : {"price": 1}), sold: (bySold ? true : false) }),
 			success: function( json ) {
 				var items = [];
 				for (var i = 0; i < json.results.length; i++) {
